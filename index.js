@@ -25,8 +25,16 @@ async function run() {
     app.get("/product", async (req, res) => {
       const query = {};
       const cursor = productCollection.find(query);
-      const products = await cursor.limit(10).toArray();
+      const products = await cursor.toArray();
       res.send(products);
+    });
+
+    //product count
+    app.get("/productCount", async (req, res) => {
+      const query = {};
+      const cursor = productCollection.find(query);
+      const count = await cursor.count();
+      res.send({ count });
     });
   } finally {
   }
